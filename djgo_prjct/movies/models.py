@@ -20,6 +20,8 @@ class PersonMovie(models.Model):
     role = models.CharField(max_length=100)
     person = models.ForeignKey(Person, on_delete=None)
     movie = models.ForeignKey(Movie, on_delete=None)
+    perc = models.DecimalField(max_digits=3, )
+
     
 
 

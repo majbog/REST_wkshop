@@ -58,8 +58,8 @@ class MovieView(APIView):
 class PeopleView(APIView):
 
     def get(self, request, format=None):
-        movies = Person.objects.all()
-        serializer = PersonSerializer(movies, many=True, context={"request": request})
+        people = Person.objects.all()
+        serializer = PersonSerializer(people, many=True, context={"request": request})
         return Response(serializer.data)
 
     def post(self, request, format=None):
@@ -73,7 +73,7 @@ class PeopleView(APIView):
 class PersonView(APIView):
 
     def get(self, request, id, format=None):
-        person = get_object_or_404(Movie, id=id)
+        person = get_object_or_404(Person, id=id)
         serializer = PersonSerializer(person, context={"request": request})
         return Response(serializer.data)
     def delete(self, request, id, format=None):
@@ -81,7 +81,7 @@ class PersonView(APIView):
         person.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     def put(self, request, id, format=None):
-        person = get_object_or_404(id=id)
+        person = get_object_or_404(Person, id=id)
         serializer = PersonSerializer(person, data=request.data)
         if serializer.is_valid():
             serializer.save()
